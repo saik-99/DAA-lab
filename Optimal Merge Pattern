@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to Sort the files in ascending order, perform optimal file merging and return the minimum cost
+int optimalMerge(int files[], int n) {
+    int cost = 0;
+    // Initial sort
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (files[j] > files[j + 1]) {
+                int temp = files[j];
+                files[j] = files[j + 1];
+                files[j + 1] = temp;
+            }
+        }
+    }
+
+    while (n > 1) {
+        // Merge the two smallest files
+        int mergedSize = files[0] + files[1];
+        cost += mergedSize;
+
+        // Replace first file with merged size
+        files[0] = mergedSize;
+
+        // Shift remaining files to the left
+        for (int i = 1; i < n - 1; i++) {
+            files[i] = files[i + 1];
+        }
+        n--;
+
+        // Re-sort the array after merging
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (files[j] > files[j + 1]) {
+                    int temp = files[j];
