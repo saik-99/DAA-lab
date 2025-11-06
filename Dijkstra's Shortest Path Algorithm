@@ -1,0 +1,37 @@
+#include <limits.h> 
+#include <stdio.h>
+#define MAX 20
+int V, E;
+int graph[MAX][MAX];
+#define INFINITY 99999
+
+void dijkstra(int G[MAX][MAX], int n, int startnode) {
+    int cost[MAX][MAX], distance[MAX], pred[MAX];
+    int visited[MAX], count, mindistance, nextnode, i, j;
+
+    // Initialize cost matrix
+    for(i = 1; i <= n; i++) {
+        for(j = 1; j <= n; j++) {
+            if(G[i][j] == 0)
+                cost[i][j] = INFINITY;
+            else
+                cost[i][j] = G[i][j];
+        }
+    }
+
+    // Initialize distances and predecessors
+    for(i = 1; i <= n; i++) {
+        distance[i] = cost[startnode][i];
+        pred[i] = startnode;
+        visited[i] = 0;
+    }
+
+    distance[startnode] = 0;
+    visited[startnode] = 1;
+    count = 1;
+
+    while(count < n) {
+        mindistance = INFINITY;
+        for(i = 1; i <= n; i++) {
+            if(distance[i] < mindistance && !visited[i]) {
+} 
