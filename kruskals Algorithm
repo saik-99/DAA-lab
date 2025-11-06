@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#define INF 9999
+
+int find(int parent[], int i) {
+    if (parent[i] != i)
+        parent[i] = find(parent, parent[i]); // Path compression
+    return parent[i];
+}
+
+
+void union1(int parent[], int rank[], int i, int j) {
+int root_i = find(parent, i);
+    int root_j = find(parent, j);
+
+    if (rank[root_i] < rank[root_j])
+        parent[root_i] = root_j;
+    else if (rank[root_i] > rank[root_j])
+        parent[root_j] = root_i;
+    else {
+        parent[root_j] = root_i;
+        rank[root_i]++;
+	}
+	// Write your code here...
+}
+
+
+void kruskalMST(int **cost, int V) {
+int parent[V], rank[V];
+    for (int i = 0; i < V; i++) {
+        parent[i] = i;
+        rank[i] = 0;
+    }
+
+    // Create edge list
+}
